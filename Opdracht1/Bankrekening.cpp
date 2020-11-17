@@ -34,8 +34,7 @@ Bankrekening Bankrekening::operator-(const Transactie& t) const
 
 Bankrekening& Bankrekening::addTransactie(const Transactie& t)
 {
-    std::list<Transactie> h = historie;
-    h.push_back(t);
+    historie.push_back(t);
     saldo += t.getBedrag();
 
     return *this;
@@ -54,11 +53,13 @@ std::ostream& operator<<(std::ostream &os, const Bankrekening &b)
     os << "Transacties: " << std::endl;
 
     //voor elke transactie in de historie, put bedrag en datum in ostream
-    for (std::list<Transactie>::iterator it = h.begin(); it != h.end(); ++it)
+    for (auto it = h.begin(); it != h.end(); ++it)
     {
-        Transactie t = *it;
-        os << "Bedrag: " << t.getBedrag() << ". Datum: " << t.getDatum() << std::endl;
+        //Transactie t = *it;
+        os << "Bedrag: " << it->getBedrag() << ". Datum: " << it->getDatum() << std::endl;
     }
+
+    os << std::endl;
 
     return os;
 }
